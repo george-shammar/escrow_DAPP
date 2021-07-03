@@ -4,15 +4,15 @@ pragma solidity >=0.4.22 <0.9.0;
 contract Escrow {
     address agent;
     
+    constructor() public {
+        agent = msg.sender;
+    }
+    
     mapping(address => uint256) public deposits;
     
     modifier onlyAgent() {
         require(msg.sender == agent);
         _;
-    }
-    
-    constructor() {
-        agent = msg.sender;
     }
     
     function debitBuyer() public payable {
